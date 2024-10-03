@@ -1,6 +1,6 @@
 <?php
 
-namespace Fmk\Core;
+namespace Fmk\MVC;
 
 class View{
 
@@ -11,9 +11,8 @@ class View{
         $this->view = $view;
     }
 
-    public function render(array $data = []){
+    public function render(){
         ob_start();
-        extract($data);
         include $this->view;
         $content = ob_get_clean();
         return $content;
