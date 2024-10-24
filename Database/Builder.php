@@ -2,6 +2,7 @@
 
 namespace Fmk\Database;
 
+
 use Closure;
 
 class Builder
@@ -21,11 +22,11 @@ class Builder
         $this->wheres[] = compact('type', 'column', 'operator', 'value', 'boolean');
         return $this;
     }
+
     public function orWhere($column, $operator = null, $value = null)
     {
         return $this->where($column, $operator, $value, 'or');
     }
-
 
     public function isEmpty(){
         return empty($this->wheres);
@@ -60,3 +61,5 @@ class Builder
         return [implode(' ',$sql),$data];
     }
 }
+
+
