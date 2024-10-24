@@ -16,7 +16,8 @@ class Mysql extends Driver{
     protected function getDSN()
     {
         return "mysql:host=".$this->host.
-        ";port=".$this->port.";dbname=".$this->database;
+                    ";port=".$this->port.
+                    ";dbname=".$this->database;
     }
 
 }
