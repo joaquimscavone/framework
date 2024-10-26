@@ -132,6 +132,7 @@ abstract class Driver
         [$where, $wdata] = $this->compileBuilder($builder);
         $this->sql = $sql . $where . ";";
         $this->data = array_merge($data, $wdata);
+        return $this;
     }
 
     public function delete($table, Builder $builder = null)
@@ -139,6 +140,7 @@ abstract class Driver
         $sql = "DELETE FROM $table";
         [$where, $this->data] = $this->compileBuilder($builder);
         $this->sql = "$sql$where;";
+        return $this;
     }
 
     public function execute($sql, array $data = [])

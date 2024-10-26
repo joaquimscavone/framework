@@ -62,5 +62,9 @@ class Builder
         return ["", []];
     }
 
+    public function isEmpty(){
+        return empty($this->wheres);
+    }
+
 
 }
