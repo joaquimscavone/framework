@@ -9,13 +9,22 @@ class Initialize{
     }
 
     private static function loadConfigs(){
-        require_once (__DIR__ .DIRECTORY_SEPARATOR."Configs".DIRECTORY_SEPARATOR."constantes.php");
+        $configs_path =__DIR__ .DIRECTORY_SEPARATOR."Configs".DIRECTORY_SEPARATOR;
+        require_once ($configs_path."constantes.php");
+        $drivers['DATABASE_DRIVERS'] = require_once $configs_path . "database_drivers.php";
+        self::createConstants($drivers);
     }
 
     private static function loadHelpers(){
         $helpers = glob(__DIR__ . DIRECTORY_SEPARATOR . "Helpers" . DIRECTORY_SEPARATOR . "/*.php");
         foreach ($helpers as $helper) {
             require_once $helper;
+        }
+    }
+
+    public static function createConstants(array $constants){
+        foreach($constants as $name => $value){
+            defined($name) || define($name, $value);
         }
     }
 }
