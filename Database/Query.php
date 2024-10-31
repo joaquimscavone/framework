@@ -3,6 +3,8 @@
 namespace Fmk\Database;
 
 use Fmk\Database\Drivers\Driver;
+use Fmk\MVC\Model;
+use PDO;
 
 class Query{
 
@@ -17,31 +19,47 @@ class Query{
     protected $orders = [];
     protected array $columns = ['*'];
 
+    protected $class;
+
+    protected $callback;
+
     public function __construct(Driver $driver, $table){
         $this->driver = $driver;
         $this->table = $table;
+        if(class_exists($table) && is_subclass_of($table, Model::class)){
+            $this->class = $table;
+            $this->table = $table::getTableName();
+        }
         $this->builder = new Builder;
     }
 
     public function get(){
-        return $this->driver->select(
+        $stm =  $this->driver->select(
             $this->table,
             $this->columns,
             $this->builder,
             $this->orders,
             $this->limit,
             $this->offset,
-        )->exec()->fetchAll(\PDO::FETCH_ASSOC);
+        )->exec();
+        if($this->class){
+            return $stm->fetchAll(PDO::FETCH_CLASS, $this->class);
+        }
+        return $stm->fetchAll(PDO::FETCH_ASSOC);
     }
     public function first(){
-        return $this->driver->select(
+        $stm = $this->driver->select(
             $this->table,
             $this->columns,
             $this->builder,
             $this->orders,
             $this->limit,
             $this->offset,
-        )->exec()->fetch(\PDO::FETCH_ASSOC);
+        )->exec();
+        if($this->class){
+            return $stm->fetchObject($this->class);
+        }
+        return $stm->fetch(PDO::FETCH_ASSOC);
     }
 
     public function insert(array $data){
@@ -98,5 +116,17 @@ class Query{
     public function orderAsc($column){
         $this->orders[] = [$column, 'asc'];
         return $this;
+    }
+
+    public function setCallback($callback){
+        $this->callback = $callback;
+        return $this;
+    }
+
+    public function exec(){
+        if($this->callback){
+            return $this->{$this->callback}();
+        }
+        return null;
     }
 }
