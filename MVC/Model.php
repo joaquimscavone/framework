@@ -127,7 +127,7 @@ abstract class Model{
         return $related_class::query()->where($foreign_key, '=', $this->id)->setCallback('first');
     }
     //cria um relacionamento de 1 - 1 onde a chave estrangeira está na minha classe
-    protected function belogsTo($related_class, $local_key){
+    protected function belongsTo($related_class, $local_key){
         return $related_class::query()->where($related_class::$pk, '=', $this->$local_key)->setCallback('first');
     }
     //Cria um relacionamento de 1-n com outra tabela onde os registros estejam em outras tabelas.

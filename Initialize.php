@@ -6,6 +6,7 @@ class Initialize{
     public static function run(){
         self::loadConfigs();
         self::loadHelpers();
+        self::loadRoutes();
     }
 
     private static function loadConfigs(){
@@ -19,6 +20,12 @@ class Initialize{
         $helpers = glob(__DIR__ . DIRECTORY_SEPARATOR . "Helpers" . DIRECTORY_SEPARATOR . "/*.php");
         foreach ($helpers as $helper) {
             require_once $helper;
+        }
+    }
+    private static function loadRoutes(){
+        $routes = glob(ROUTES_PATH ."/*.php");
+        foreach ($routes as $route) {
+            require_once $route;
         }
     }
 
