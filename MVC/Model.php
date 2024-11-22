@@ -25,7 +25,7 @@ abstract class Model{
         $this->old = $this->data;
     }
 
-    public function __set($name,$value){
+    public function __set($name, $value){
         $this->data[$name] = $value;
     }
 
@@ -63,7 +63,7 @@ abstract class Model{
 
 
     public static function select($columns){
-        return static::query->select((is_array($columns)) ? $columns : func_get_args());
+        return static::query()->select((is_array($columns)) ? $columns : func_get_args());
         
     }
 
@@ -122,15 +122,30 @@ abstract class Model{
         return true;
     }
 
-    //cria um relacionamento de 1 - 1 onde a chave estrangeira está na outra classe
+    /**
+     * Cria um relacionamento de 1 - 1 onde a chave estrangeira está na outra classe
+     * @param class-string $related_class
+     * @param string $foreign_key
+     * @return Query
+     */
     protected function hasOne($related_class, $foreign_key){
         return $related_class::query()->where($foreign_key, '=', $this->id)->setCallback('first');
     }
-    //cria um relacionamento de 1 - 1 onde a chave estrangeira está na minha classe
+    /**
+     * Cria um relacionamento de 1 - 1 onde a chave estrangeira está na minha classe
+     * @param class-string $related_class
+     * @param string $local_key
+     * @return Query
+     */
     protected function belongsTo($related_class, $local_key){
         return $related_class::query()->where($related_class::$pk, '=', $this->$local_key)->setCallback('first');
     }
-    //Cria um relacionamento de 1-n com outra tabela onde os registros estejam em outras tabelas.
+    /**
+     * Cria um relacionamento de 1-n com outra tabela onde os registros estejam em outras tabelas.
+     * @param class-string $related_class
+     * @param string $foreign_key
+     * @return Query
+     */
     protected function hasMany($related_class,$foreign_key){
         return $related_class::query()->where($foreign_key, '=', $this->id)->setCallback('get');
     }

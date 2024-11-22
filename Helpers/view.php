@@ -10,20 +10,21 @@ if (!function_exists("view_path")) {
     }
 }
 if (!function_exists("view")) {
-    function view($view_file, $template_file = null)
+    function view($view_file, array $data = [] ,$template_file = null)
     {
         $view = view_path($view_file);
 
         if (file_exists($view)) {
             $view = new Fmk\MVC\View($view);
-            $view = $view->render(); //codigo html da view;
+            $data['template'] = new stdClass;
+            $view = $view->render($data); //codigo html da view;
             if(isset($template_file)){
                 $template = template_path(template_file: $template_file);
                 if(!file_exists($template)){
                     throw new Exception(message: "O Template $template não foi encontrada.");
                 }
                 $template= new Fmk\MVC\View($template); // virou objeto
-                $template = $template->render(); // virou html;
+                $template = $template->render($data); // virou html;
                 $view = str_replace('{{$VIEW}}', $view, $template);
             }
         } else {
