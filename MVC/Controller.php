@@ -2,6 +2,8 @@
 
 namespace Fmk\MVC;
 
-class Controller{
+use Fmk\Traits\Middleware;
 
+class Controller{
+    use Middleware;
 }

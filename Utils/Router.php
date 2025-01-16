@@ -6,6 +6,10 @@ namespace Fmk\Utils;
 class Router{
     protected static $routes = [];
 
+    protected static $error404;
+
+    protected static $error403;
+
     public static function swapName($old_name, $new_name){
         if(self::$routes[$old_name]){
             self::$routes[$new_name] = &self::$routes[$old_name];
@@ -55,6 +59,32 @@ class Router{
         }
         $uri = (substr($uri,0,1) === "/") ? $uri: "/$uri";  
         return rtrim($uri,"/");
+    }
+
+    public static function defineError404(callable $callback){
+        self::$error404 = $callback;
+    }
+    public static function defineError403(callable $callback){
+        self::$error403 = $callback;
+    }
+
+    public static function error404(string $msg = 'Not Found!'){
+        if(is_callable(self::$error404)){
+            $function = self::$error404;
+            return $function($msg);
+        }
+        http_response_code(404);
+        echo "404 - $msg";
+        exit();
+    }
+    public static function error403(string $msg = 'Forbidden!'){
+        if(is_callable(self::$error403)){
+            $function = self::$error403;
+            return $function($msg);
+        }
+        http_response_code(403);
+        echo "403 - $msg";
+        exit();
     }
 
 

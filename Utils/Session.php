@@ -10,6 +10,9 @@ class Session
     const DATA_KEY = 'data';
     const USER_KEY = 'user';
 
+    const REQUEST_KEY = 'request';
+    const REQUEST_OLD_KEY = 'request_old';
+
     protected function __construct()
     {
         if (defined('SESSION_NAME')) {
@@ -94,6 +97,19 @@ class Session
 
     public function getUser(){
         return $_SESSION[self::USER_KEY] ?? false;
+    }
+
+    public function requestRegister(){
+        $_SESSION[self::REQUEST_OLD_KEY] = $this->request();
+        $_SESSION[self::REQUEST_KEY] = Request::getInstance();
+    }
+
+    public function request(){
+        return $_SESSION[self::REQUEST_KEY] ?? null;
+    }
+    
+    public function requestOld(){
+        return $_SESSION[self::REQUEST_OLD_KEY] ?? null;
     }
 
 }
