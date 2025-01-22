@@ -83,5 +83,13 @@ class Request
         return $this->data;
     }
 
+    public function old(){
+        return Session::getInstance()->requestOld();
+    }
+
+    public function redirect(){
+        return $this->getRoute()->redirect();
+    }
+
 
 }

@@ -114,6 +114,10 @@ class Route
         return call_user_func_array($callback, $this->paramns);
     }
 
+    public function isActive(){
+        return $this->active;
+    }
+
     public function getMethod()
     {
         return $this->method;
