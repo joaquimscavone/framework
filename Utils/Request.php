@@ -2,8 +2,11 @@
 
 namespace Fmk\Utils;
 
+use Fmk\Traits\Validate;
+
 class Request
 {
+    use Validate;
     protected static $instance;
 
     protected $uri;

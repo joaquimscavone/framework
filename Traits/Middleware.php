@@ -8,7 +8,7 @@ Trait Middleware{
 
     protected $middlewares = [
                                 \Fmk\Middlewares\CSRFMiddleware::class,
-                                \Fmk\Middlewares\DuplicateRequestGuardMiddleware::class
+                                // \Fmk\Middlewares\DuplicateRequestGuardMiddleware::class
                             ];
 
     protected function swapMiddlewares(){

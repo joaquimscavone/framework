@@ -177,6 +177,10 @@ abstract class Model{
         $this->exists = !empty($this->data);
         return true;
     }
+
+    public static function getPk(){
+        return self::$pk;
+    }
     
 
 
