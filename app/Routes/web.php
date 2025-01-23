@@ -26,7 +26,12 @@ Router::get('funcionario/{id}',[App\Controllers\FuncionariosController::class,'e
 Router::post('funcionario/{id}',[App\Controllers\FuncionariosController::class,'update']);
 Router::post('funcionario',[App\Controllers\FuncionariosController::class,'storage'])->name('funcionario.storage');
 
-
+Router::get('produtos',[App\Controllers\ProdutosController::class,'index'])->name('produto.list');
+Router::get('produto/novo',[App\Controllers\ProdutosController::class,'create'])->name('produto.create');
+Router::post('produto/delete',[App\Controllers\ProdutosController::class,'delete'])->name('produto.delete');
+Router::get('produto/{id}',[App\Controllers\ProdutosController::class,'edit'])->name('produto.edit');
+Router::post('produto/{id}',[App\Controllers\ProdutosController::class,'update']);
+Router::post('produto',[App\Controllers\ProdutosController::class,'storage'])->name('produto.storage');
 
 
 Router::get('gorjetas/{funcionario_id}/{data}',function($funcionario_id,$data){

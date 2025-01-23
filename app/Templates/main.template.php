@@ -38,6 +38,7 @@
         <ul class="nav">
           <?=component('menu',['route'=>'home', 'label'=>'DashBoard', 'icon' => 'fa fa-table']);?>
           <?=component('menu',['route'=>'funcionario.list', 'label'=>'Funcionários', 'icon' => 'fa fa-users']);?>
+          <?=component('menu',['route'=>'produto.list', 'label'=>'Produtos', 'icon' => 'fa fa-coffee']);?>
          
         </ul>
       </div>
