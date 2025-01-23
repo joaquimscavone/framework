@@ -12,7 +12,8 @@
                     <div class="card-body">
                         <h3 class="text-center"><?= $funcionario->nome ?></h3>
                     </div>
-                    <div class="card-footer text-center">
+                    <div class="card-footer d-flex justify-content-center ">
+                        <a href="<?=route('funcionario.edit',['id'=>$funcionario->id])?>" class="btn btn-primary mr-3"><i class="fa fa-edit"></i></a>
                         <form action="<?= route('funcionario.delete') ?>" method="post">
                             <?= CSRF() ?>
                             <input type="hidden" name="id" value="<?= $funcionario->id ?>">

@@ -1,11 +1,12 @@
 <div class="card card-user">
-  <form action="<?= route('funcionario.storage') ?>" method="POST">
+  <form action="<?= route('funcionario.edit',['id'=>$id]) ?>" method="POST">
     <div class="card-header">
       <h5 class="card-title">Cadastro de Funionário</h5>
     </div>
     <div class="card-body px-4">
 
       <?= CSRF(); ?>
+      <input type="hidden" name="id" value="<?=$id ?? ''?>">
       <div class="row">
         <div class="col-md-4">
           <div class="form-group">
@@ -100,8 +101,7 @@
         <div class="col-md-6">
           <div class="form-group">
             <label for="password">Senha:</label>
-            <input type="password" id="password" name="password" class="form-control  <?=has_error('password','is-invalid')?>" placeholder="Senha" value=""
-              required>
+            <input type="password" id="password" name="password" class="form-control  <?=has_error('password','is-invalid')?>" placeholder="Senha" value="">
               <div class='invalid-feedback'>
                 <ul>
                   <?php foreach (errors('password') as $erro): ?>
@@ -115,7 +115,7 @@
           <div class="form-group">
             <label for="password">Confirmação:</label>
             <input type="password" id="password" name="confirmacao" class="form-control" placeholder="Confirme sua senha"
-              value="" required>
+              value="" >
           </div>
         </div>
       </div>

@@ -37,6 +37,10 @@ abstract class Model{
         return isset($this->data[$name]);
     }
 
+    public function toArray(){
+        return $this->data;
+    }
+
     public static function query(){
         return DB::connection(static::$conneciton_name)->table(static::class);
     }

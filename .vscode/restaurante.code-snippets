@@ -1,0 +1,59 @@
+{
+	// Place your restaurante workspace snippets here. Each snippet is defined under a snippet name and has a scope, prefix, body and 
+	// description. Add comma separated ids of the languages where the snippet is applicable in the scope field. If scope 
+	// is left empty or omitted, the snippet gets applied to all languages. The prefix is what is 
+	// used to trigger the snippet and the body will be expanded and inserted. Possible variables are: 
+	// $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders. 
+	// Placeholders with the same ids are connected.
+	// Example:
+	// "Print to console": {
+	// 	"scope": "javascript,typescript",
+	// 	"prefix": "log",
+	// 	"body": [
+	// 		"console.log('$1');",
+	// 		"$2"
+	// 	],
+	// 	"description": "Log output to console"
+	// }
+
+	"csrf": {
+		"scope": "html",
+		"prefix": "csrf",
+		"body": [
+			"<?=CSRF();?>"
+		],
+		"description": "cria o csrf da aplicação"
+	},
+	"old":{
+		"scope": "html",
+		"prefix": "old",
+		"body": [
+			"<?=old('$1',$2);?>"
+		],
+		"description": "cria um old para aplicação"
+	},
+	"has_error_invalid":{
+		"scope": "html",
+		"prefix": "has_error:invalid",
+		"body": [
+			" <?=has_error('$1','is-invalid')?>"
+		],
+		"description": "cria um has error que retorna is-invalid"
+	},
+	"invalid_feedback":{
+		"scope": "html",
+		"prefix": "invalidfeedback",
+		"body": [
+			"<div class='invalid-feedback'>",
+            "\t<ul>",
+            "\t\t<?php foreach (errors('$1') as \\$erro): ?>",
+            "\t\t\t<li><?= \\$erro ?></li>",
+            "\t\t<?php endforeach; ?>",
+            "\t</ul>",
+            "</div>"
+		],
+		"description": "cria um has error que retorna is-invalid"
+	}
+
+
+}
